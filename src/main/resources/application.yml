@@ -1,7 +1,7 @@
 # Agentic-RAG Application Configuration
 
 server:
-  port: 8080
+  port: 8090
   compression:
     enabled: true
   error:
@@ -11,10 +11,10 @@ server:
 spring:
   application:
     name: agentic-rag
-  
+
   profiles:
     active: local
-  
+
   datasource:
     url: jdbc:postgresql://localhost:5432/ragdb
     username: rag_user
@@ -26,7 +26,7 @@ spring:
       connection-timeout: 30000
       idle-timeout: 600000
       max-lifetime: 1800000
-  
+
   jpa:
     hibernate:
       ddl-auto: validate
@@ -37,13 +37,13 @@ spring:
         format_sql: true
         default_schema: rag
     open-in-view: false
-  
+
   flyway:
     enabled: true
     baseline-on-migrate: true
     schemas: rag
     locations: classpath:db/migration
-  
+
   data:
     redis:
       host: localhost
@@ -54,7 +54,7 @@ spring:
           max-active: 8
           max-idle: 8
           min-idle: 2
-  
+
   cache:
     type: redis
     redis:
@@ -93,7 +93,7 @@ resilience4j:
         failure-rate-threshold: 50
         slow-call-duration-threshold: 5s
         slow-call-rate-threshold: 50
-  
+
   retry:
     instances:
       llm:
@@ -140,12 +140,12 @@ app:
   name: Agentic-RAG
   version: 0.1.0
   description: Enterprise-grade RAG system with agentic AI capabilities
-  
+
   rag:
     chunk-size: 512
     chunk-overlap: 50
     max-context-tokens: 4000
-  
+
   agent:
     max-iterations: 5
     planning-timeout: 30000

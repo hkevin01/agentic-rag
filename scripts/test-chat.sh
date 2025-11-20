@@ -11,7 +11,7 @@ echo "=========================================="
 
 # Test health endpoint
 echo -e "\n${YELLOW}1. Testing health endpoint...${NC}"
-HEALTH_RESPONSE=$(curl -s http://localhost:8080/api/health)
+HEALTH_RESPONSE=$(curl -s http://localhost:8090/api/health)
 if [ $? -eq 0 ]; then
   echo -e "${GREEN}✓ Health check passed${NC}"
   echo "Response: $HEALTH_RESPONSE"
@@ -37,7 +37,7 @@ CHAT_REQUEST='{
 echo "Request body:"
 echo "$CHAT_REQUEST" | jq '.'
 
-CHAT_RESPONSE=$(curl -s -X POST http://localhost:8080/api/chat \
+CHAT_RESPONSE=$(curl -s -X POST http://localhost:8090/api/chat \
   -H "Content-Type: application/json" \
   -d "$CHAT_REQUEST")
 
@@ -45,7 +45,7 @@ if [ $? -eq 0 ]; then
   echo -e "\n${GREEN}✓ Chat request successful${NC}"
   echo "Response:"
   echo "$CHAT_RESPONSE" | jq '.'
-  
+
   # Extract and display key fields
   ANSWER=$(echo "$CHAT_RESPONSE" | jq -r '.answer')
   TOKENS=$(echo "$CHAT_RESPONSE" | jq -r '.tokensUsed')
@@ -70,7 +70,7 @@ FOLLOWUP_REQUEST='{
 echo "Request body:"
 echo "$FOLLOWUP_REQUEST" | jq '.'
 
-FOLLOWUP_RESPONSE=$(curl -s -X POST http://localhost:8080/api/chat \
+FOLLOWUP_RESPONSE=$(curl -s -X POST http://localhost:8090/api/chat \
   -H "Content-Type: application/json" \
   -d "$FOLLOWUP_REQUEST")
 

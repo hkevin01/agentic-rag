@@ -25,7 +25,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    
+
     <!-- Dependency versions -->
     <spring-boot.version>3.2.0</spring-boot.version>
     <lombok.version>1.18.30</lombok.version>
@@ -33,12 +33,11 @@
     <jackson.version>2.16.0</jackson.version>
     <springdoc.version>2.3.0</springdoc.version>
     <resilience4j.version>2.1.0</resilience4j.version>
-    
+
     <!-- Testing -->
-    <junit.version>5.10.1</junit.version>
     <mockito.version>5.7.0</mockito.version>
     <testcontainers.version>1.19.3</testcontainers.version>
-    
+
     <!-- Code quality -->
     <checkstyle.version>10.12.5</checkstyle.version>
     <spotbugs.version>4.8.2</spotbugs.version>
@@ -51,22 +50,22 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
@@ -78,7 +77,7 @@
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
@@ -108,7 +107,7 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
@@ -120,13 +119,13 @@
       <artifactId>resilience4j-spring-boot3</artifactId>
       <version>${resilience4j.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>io.github.resilience4j</groupId>
       <artifactId>resilience4j-circuitbreaker</artifactId>
       <version>${resilience4j.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>io.github.resilience4j</groupId>
       <artifactId>resilience4j-retry</artifactId>
@@ -166,7 +165,7 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-text</artifactId>
@@ -186,21 +185,21 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
       <version>${testcontainers.version}</version>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>postgresql</artifactId>
       <version>${testcontainers.version}</version>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
