@@ -1,0 +1,152 @@
+# Agentic-RAG Application Configuration
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: agentic-rag
+  
+  profiles:
+    active: local
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ragdb
+    username: rag_user
+    password: rag_pass
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: rag
+    open-in-view: false
+  
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: rag
+    locations: classpath:db/migration
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 2
+  
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+
+# LLM Configuration
+llm:
+  base-url: http://localhost:8081
+  api-key: dummy-key-for-mock
+  model: gpt-4
+  timeout: 30000
+  max-retries: 3
+
+# OpenSearch Configuration
+opensearch:
+  url: http://localhost:9200
+  index-name: documents
+  timeout: 5000
+
+# Cloud Engine Configuration
+cloud:
+  base-url: http://localhost:8082
+  timeout: 10000
+
+# Resilience4j Configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      llm:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 10s
+        failure-rate-threshold: 50
+        slow-call-duration-threshold: 5s
+        slow-call-rate-threshold: 50
+  
+  retry:
+    instances:
+      llm:
+        max-attempts: 3
+        wait-duration: 1s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+
+# Management & Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.enterprise.rag: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# OpenAPI/Swagger
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+# Application-specific
+app:
+  name: Agentic-RAG
+  version: 0.1.0
+  description: Enterprise-grade RAG system with agentic AI capabilities
+  
+  rag:
+    chunk-size: 512
+    chunk-overlap: 50
+    max-context-tokens: 4000
+  
+  agent:
+    max-iterations: 5
+    planning-timeout: 30000
+    tool-timeout: 10000
