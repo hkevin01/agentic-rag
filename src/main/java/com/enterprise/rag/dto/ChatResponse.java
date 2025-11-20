@@ -10,26 +10,32 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * DTO for chat API responses.
+ * Response DTO for chat endpoint.
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ChatResponse {
 
   private String answer;
 
   private String sessionId;
 
+  private String conversationId;
+
   private List<String> sources;
 
   private Map<String, Object> metadata;
 
-  @Builder.Default
-  private LocalDateTime timestamp = LocalDateTime.now();
-
   private Integer tokensUsed;
 
+  private LocalDateTime timestamp;
+
+  @Builder.Default
+  private Boolean fromCache = false;
+
   private String model;
+
+  private String conversationTitle;
 }

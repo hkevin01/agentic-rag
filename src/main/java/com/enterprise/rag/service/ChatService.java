@@ -54,6 +54,7 @@ public class ChatService {
       return ChatResponse.builder()
           .answer(answer)
           .sessionId(request.getSessionId())
+          .conversationId(conversation.getId().toString())
           .sources(Collections.emptyList())
           .metadata(buildMetadata(conversation))
           .timestamp(LocalDateTime.now())
@@ -67,6 +68,7 @@ public class ChatService {
           .answer("I apologize, but I encountered an error processing your request. Please try again.")
           .sessionId(request.getSessionId())
           .timestamp(LocalDateTime.now())
+          .model("error")
           .build();
     }
   }
@@ -92,7 +94,7 @@ public class ChatService {
         .userId(userId)
         .title("New Conversation")
         .status("active")
-        .metadata("{}")
+        .metadata(new HashMap<>())
         .build();
     return conversationRepository.save(conversation);
   }
@@ -107,7 +109,7 @@ public class ChatService {
         .content(content)
         .timestamp(LocalDateTime.now())
         .tokenCount(estimateTokens(content))
-        .metadata("{}")
+        .metadata(new HashMap<>())
         .build();
     return messageRepository.save(message);
   }

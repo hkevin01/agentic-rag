@@ -15,25 +15,34 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Conversation entity representing a chat session.
+ * Document entity representing ingested documents.
  */
 @Entity
-@Table(name = "conversations", schema = "rag")
+@Table(name = "documents", schema = "rag")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Conversation {
+public class Document {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column(name = "user_id")
-  private String userId;
+  @Column(length = 1000)
+  private String title;
 
   @Column(length = 500)
-  private String title;
+  private String source;
+
+  @Column(nullable = false, columnDefinition = "TEXT")
+  private String content;
+
+  @Column(name = "content_hash", length = 64, unique = true)
+  private String contentHash;
+
+  @Column(name = "document_type", length = 100)
+  private String documentType;
 
   @Column(name = "created_at", nullable = false, updatable = false)
   private LocalDateTime createdAt;
@@ -47,11 +56,11 @@ public class Conversation {
 
   @Column(length = 50)
   @Builder.Default
-  private String status = "active";
+  private String status = "indexed";
 
-  @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
   @Builder.Default
-  private List<Message> messages = new ArrayList<>();
+  private List<DocumentChunk> chunks = new ArrayList<>();
 
   @PrePersist
   protected void onCreate() {
@@ -64,13 +73,13 @@ public class Conversation {
     updatedAt = LocalDateTime.now();
   }
 
-  public void addMessage(Message message) {
-    messages.add(message);
-    message.setConversation(this);
+  public void addChunk(DocumentChunk chunk) {
+    chunks.add(chunk);
+    chunk.setDocument(this);
   }
 
-  public void removeMessage(Message message) {
-    messages.remove(message);
-    message.setConversation(null);
+  public void removeChunk(DocumentChunk chunk) {
+    chunks.remove(chunk);
+    chunk.setDocument(null);
   }
 }

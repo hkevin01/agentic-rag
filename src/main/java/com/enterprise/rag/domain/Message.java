@@ -5,44 +5,53 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 /**
- * Entity representing a message in a conversation.
- * Supports user, assistant, system, and tool messages.
+ * Message entity representing individual chat messages.
  */
 @Entity
 @Table(name = "messages", schema = "rag")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Message {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id", updatable = false, nullable = false)
+  @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "conversation_id", nullable = false)
   private Conversation conversation;
 
-  @Column(name = "role", nullable = false, length = 50)
+  @Column(length = 50, nullable = false)
   private String role;
 
-  @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+  @Column(nullable = false, columnDefinition = "TEXT")
   private String content;
 
-  @Column(name = "timestamp", nullable = false)
+  @Column(nullable = false)
   @Builder.Default
   private LocalDateTime timestamp = LocalDateTime.now();
 
   @Column(name = "token_count")
   private Integer tokenCount;
 
-  @Column(name = "metadata", columnDefinition = "jsonb")
-  private String metadata;
+  @JdbcTypeCode(SqlTypes.JSON)
+  @Column(columnDefinition = "jsonb")
+  private Map<String, Object> metadata;
+
+  @PrePersist
+  protected void onCreate() {
+    if (timestamp == null) {
+      timestamp = LocalDateTime.now();
+    }
+  }
 }
