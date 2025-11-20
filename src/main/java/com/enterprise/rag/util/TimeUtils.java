@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Utility class for time-related operations and conversions.
  * REQ-TIME-001: All time measurements must be consistent and well-documented.
- * 
+ *
  * Time Units Standards:
  * - Internal storage: milliseconds (ms) as Integer/Long
  * - Human-readable display: seconds with 2 decimal places
@@ -25,7 +25,7 @@ public final class TimeUtils {
   /**
    * Convert milliseconds to seconds with decimal precision.
    * REQ-TIME-002: Provide conversion utilities between time units.
-   * 
+   *
    * @param milliseconds time in milliseconds (non-negative)
    * @return time in seconds with 2 decimal places
    * @throws IllegalArgumentException if milliseconds is negative
@@ -40,12 +40,13 @@ public final class TimeUtils {
   /**
    * Convert seconds to milliseconds.
    * REQ-TIME-002: Provide conversion utilities between time units.
-   * 
+   *
    * @param seconds time in seconds (non-negative)
    * @return time in milliseconds
    * @throws IllegalArgumentException if seconds is negative
    */
   public static long secondsToMilliseconds(double seconds) {
+    ValidationUtils.requireNonNegative((long) seconds, "seconds");
     if (seconds < 0) {
       throw new IllegalArgumentException("Seconds cannot be negative: " + seconds);
     }
@@ -55,7 +56,7 @@ public final class TimeUtils {
   /**
    * Calculate execution time in milliseconds between two instants.
    * REQ-TIME-003: Provide accurate execution time measurement.
-   * 
+   *
    * @param startTime start instant (must be before endTime)
    * @param endTime end instant (must be after startTime)
    * @return execution time in milliseconds
@@ -75,7 +76,7 @@ public final class TimeUtils {
   /**
    * Calculate execution time in milliseconds from a start instant to now.
    * REQ-TIME-003: Provide accurate execution time measurement.
-   * 
+   *
    * @param startTime start instant
    * @return execution time in milliseconds from start to now
    * @throws IllegalArgumentException if startTime is null or in the future
@@ -94,7 +95,7 @@ public final class TimeUtils {
   /**
    * Check if execution time exceeds a threshold.
    * REQ-TIME-004: Support timeout validation.
-   * 
+   *
    * @param executionTimeMs execution time in milliseconds
    * @param thresholdMs threshold in milliseconds
    * @return true if execution time exceeds threshold
@@ -113,7 +114,7 @@ public final class TimeUtils {
   /**
    * Convert LocalDateTime to Instant for precise time calculations.
    * REQ-TIME-005: Support conversion between LocalDateTime and Instant.
-   * 
+   *
    * @param localDateTime local date time to convert
    * @return instant representation
    * @throws IllegalArgumentException if localDateTime is null
@@ -128,7 +129,7 @@ public final class TimeUtils {
   /**
    * Convert Instant to LocalDateTime.
    * REQ-TIME-005: Support conversion between LocalDateTime and Instant.
-   * 
+   *
    * @param instant instant to convert
    * @return local date time representation
    * @throws IllegalArgumentException if instant is null
@@ -143,7 +144,7 @@ public final class TimeUtils {
   /**
    * Format execution time for human-readable display.
    * REQ-TIME-006: Provide human-readable time formatting.
-   * 
+   *
    * @param executionTimeMs execution time in milliseconds
    * @return formatted string (e.g., "1.23s", "123ms", "2m 5s")
    */
@@ -151,7 +152,7 @@ public final class TimeUtils {
     if (executionTimeMs == null || executionTimeMs < 0) {
       return "N/A";
     }
-    
+
     if (executionTimeMs < 1000) {
       return executionTimeMs + "ms";
     } else if (executionTimeMs < 60000) {
@@ -166,7 +167,7 @@ public final class TimeUtils {
   /**
    * Check if a time value is within valid bounds.
    * REQ-BOUND-001: Validate time values are within acceptable ranges.
-   * 
+   *
    * @param timeMs time value in milliseconds
    * @param minMs minimum allowed value (inclusive)
    * @param maxMs maximum allowed value (inclusive)
@@ -182,7 +183,7 @@ public final class TimeUtils {
   /**
    * Get current timestamp as milliseconds since epoch.
    * REQ-TIME-007: Provide consistent timestamp generation.
-   * 
+   *
    * @return current time in milliseconds since epoch
    */
   public static long getCurrentTimestampMs() {
@@ -192,7 +193,7 @@ public final class TimeUtils {
   /**
    * Calculate time elapsed since a given timestamp.
    * REQ-TIME-008: Calculate elapsed time from timestamp.
-   * 
+   *
    * @param timestampMs timestamp in milliseconds since epoch
    * @return elapsed time in milliseconds
    * @throws IllegalArgumentException if timestamp is in the future
