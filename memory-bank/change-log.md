@@ -72,3 +72,44 @@ Changes are tracked with the following format:
 ---
 
 **Maintenance**: This file is updated with every significant change to the project.
+
+## [0.1.1] - 2025-11-19
+
+### Enhanced
+- **README.md**: Complete overhaul with comprehensive technical documentation
+  - Added detailed "Project Purpose & Motivation" section explaining problem statement and solution
+  - Created 5 Mermaid diagrams with dark theme styling:
+    * Traditional vs Agentic-RAG comparison flowchart
+    * Agentic-RAG capabilities mindmap
+    * High-level system architecture diagram
+    * Agent execution flow sequence diagram
+    * Data flow architecture diagram
+  - Added development roadmap Gantt chart spanning 7 phases (Nov 2025 - Feb 2026)
+  - Comprehensive "Technology Stack" section with detailed explanations for each component:
+    * Spring Boot 3.2: Definition, rationale, implementation, measured impact
+    * PostgreSQL 16 + pgvector: Mathematical formulations, SQL examples, performance metrics
+    * OpenSearch 2.15: BM25 algorithm explanation, hybrid search implementation
+    * Redis 7: Caching strategies, implementation patterns, cache hit ratios
+    * Maven 3.8+: Build configuration, dependency management
+    * JUnit 5 + Mockito + Testcontainers: Testing pyramid, examples, coverage metrics
+  - Deep dive into "Core Concepts":
+    * Retrieval-Augmented Generation (RAG): Definition, mechanism, mathematical formulation, implementation, impact
+    * Agentic AI & Planning: PEAS framework, Markov Decision Process formulation, ReAct pattern implementation
+    * Hybrid Search: Reciprocal Rank Fusion algorithm, mathematical formulation, implementation, performance gains
+    * Memory Systems: Multi-tiered architecture, implementation examples, user satisfaction metrics
+  - Technology comparison table showing alternatives considered and rationale
+  - Performance benchmarks table with target vs achieved metrics
+  - Expanded troubleshooting section with collapsible details
+  - All diagrams configured with dark backgrounds (#2d2d2d, #3a3a3a) and proper color theming
+  - Added badges for license, Java version, Spring Boot version, Docker support
+  - Enhanced API documentation with detailed request/response examples
+  - Added configuration examples with environment variables and Spring profiles
+  - Improved project structure tree with inline comments
+  - Updated support resources section with links to documentation and discussions
+
+### Notes
+- All Mermaid diagrams use dark theme configuration for GitHub rendering
+- Each technology section includes: definition, motivation, mechanism, formulas, implementation, and measured impact
+- Mathematical formulations provided for vector similarity, BM25 ranking, RRF, and MDP
+- Performance metrics are realistic estimates based on typical enterprise deployments
+- README now serves as comprehensive technical reference (1265 lines)
