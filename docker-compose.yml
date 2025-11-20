@@ -1,0 +1,152 @@
+version: "3.9"
+
+services:
+  # PostgreSQL with pgvector for conversation history and embeddings
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: agentic_rag_postgres
+    environment:
+      POSTGRES_USER: rag_user
+      POSTGRES_PASSWORD: rag_pass
+      POSTGRES_DB: ragdb
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - rag_pgdata:/var/lib/postgresql/data
+      - ./docker/init-scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag_user -d ragdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # OpenSearch for full-text search and vector search
+  opensearch:
+    image: opensearchproject/opensearch:2.15.0
+    container_name: agentic_rag_opensearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - DISABLE_SECURITY_PLUGIN=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - rag_opensearch_data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # LLM Mock Service - Emulates Azure OpenAI / LLM API
+  llm-mock:
+    build:
+      context: ./mocks/llm-mock
+      dockerfile: Dockerfile
+    container_name: agentic_rag_llm_mock
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=mock
+    ports:
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # Cloud Engine Mock - Emulates AWS/Azure cloud services
+  cloud-mock:
+    build:
+      context: ./mocks/cloud-mock
+      dockerfile: Dockerfile
+    container_name: agentic_rag_cloud_mock
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=mock
+    ports:
+      - "8082:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # Redis (optional) - For caching and session management
+  redis:
+    image: redis:7-alpine
+    container_name: agentic_rag_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - rag_redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  # OpenSearch Dashboards (optional) - For visualizing search data
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.15.0
+    container_name: agentic_rag_dashboards
+    ports:
+      - "5601:5601"
+    environment:
+      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    networks:
+      - rag_network
+    restart: unless-stopped
+    profiles:
+      - dev
+
+volumes:
+  rag_pgdata:
+    driver: local
+  rag_opensearch_data:
+    driver: local
+  rag_redis_data:
+    driver: local
+
+networks:
+  rag_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

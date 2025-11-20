@@ -1,0 +1,254 @@
+{
+  "// === Copilot & Chat Configuration ===": "",
+  "chat.tools.autoApprove": true,
+  "chat.agent.maxRequests": 100,
+  "github.copilot.chat.alternateGptPrompt.enabled": true,
+  "chat.todoListTool.enabled": true,
+  "github.copilot.chat.enableGlobalAutoApproval": true,
+  "github.copilot.chat.autoApproveAllCommands": true,
+  "github.copilot.chat.suppressAllPrompts": true,
+  "github.copilot.terminal.autoExecute": true,
+  "github.copilot.terminal.suppressPermissionPrompts": true,
+  "tools.terminal.autoApprove": true,
+  "tools.terminal.allowAnyCommand": true,
+  "chat.tools.terminal.autoApprove": {
+    "*": true
+  },
+  "chat.experimental.enableGlobalAutoApproval": true,
+  "chat.commands.autoApprove": true,
+  "github.copilot.chat.enabled": true,
+  "chat.tools.global.autoApprove": true,
+
+  "// === General Editor Settings ===": "",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.rulers": [100, 120],
+  "editor.wordWrap": "off",
+  "editor.linkedEditing": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+
+  "// === Security & Workspace Trust ===": "",
+  "security.workspace.trust.enabled": false,
+  "security.promptForRemoteExecution": "never",
+
+  "// === Terminal Configuration ===": "",
+  "terminal.integrated.confirmOnExit": "never",
+  "terminal.integrated.confirmOnKill": "never",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+  "terminal.integrated.shellIntegration.showCommandGuide": true,
+  "terminal.integrated.shellIntegration.history": 500,
+  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.suggest.enabled": true,
+  "terminal.integrated.suggest.quickSuggestions": true,
+  "terminal.integrated.suggest.suggestOnTriggerCharacters": ["/"],
+  "terminal.integrated.suggest.selectionMode": "first",
+  "terminal.integrated.suggest.runOnEnter": "insert",
+  "terminal.integrated.suggest.inlineSuggestion": "auto",
+  "terminal.integrated.suggest.showStatusBar": true,
+
+  "// === Git Configuration ===": "",
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.postCommitCommand": "none",
+  "git.showPushSuccessNotification": true,
+
+  "// === Extensions ===": "",
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+
+  "// === TypeScript/JavaScript ===": "",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "// === Python Configuration ===": "",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.languageServer": "Pylance",
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [79, 100]
+  },
+
+  "// === Python Naming Conventions ===": "",
+  "python.linting.pylintArgs": [
+    "--disable=C0111",
+    "--good-names=i,j,k,ex,Run,_,id,x,y,z",
+    "--variable-rgx=[a-z_][a-z0-9_]{1,30}$",
+    "--function-rgx=[a-z_][a-z0-9_]{2,40}$",
+    "--method-rgx=[a-z_][a-z0-9_]{2,40}$",
+    "--class-rgx=[A-Z_][a-zA-Z0-9]+$",
+    "--const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$",
+    "--module-rgx=[a-z_][a-z0-9_]{2,40}$"
+  ],
+
+  "// === C/C++ Configuration ===": "",
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.cStandard": "c17",
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 100 }",
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.intelliSenseEngine": "default",
+  "[cpp]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[c]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+
+  "// === C++ Naming Conventions (enforced via clang-tidy) ===": "",
+  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+  "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
+    "readability-identifier-naming"
+  ],
+  "C_Cpp.codeAnalysis.clangTidy.args": [
+    "-checks=-*,readability-identifier-naming",
+    "-config={CheckOptions: [ \
+      {key: readability-identifier-naming.NamespaceCase, value: lower_case}, \
+      {key: readability-identifier-naming.ClassCase, value: CamelCase}, \
+      {key: readability-identifier-naming.StructCase, value: CamelCase}, \
+      {key: readability-identifier-naming.FunctionCase, value: camelBack}, \
+      {key: readability-identifier-naming.MethodCase, value: camelBack}, \
+      {key: readability-identifier-naming.VariableCase, value: lower_case}, \
+      {key: readability-identifier-naming.ParameterCase, value: lower_case}, \
+      {key: readability-identifier-naming.MemberCase, value: lower_case}, \
+      {key: readability-identifier-naming.PrivateMemberPrefix, value: m_}, \
+      {key: readability-identifier-naming.ConstantCase, value: UPPER_CASE}, \
+      {key: readability-identifier-naming.EnumCase, value: CamelCase}, \
+      {key: readability-identifier-naming.EnumConstantCase, value: UPPER_CASE}, \
+      {key: readability-identifier-naming.GlobalConstantCase, value: UPPER_CASE} \
+    ]}"
+  ],
+
+  "// === Java Configuration ===": "",
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.format.settings.url": "${workspaceFolder}/configs/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "/usr/lib/jvm/java-17-openjdk",
+      "default": true
+    },
+    {
+      "name": "JavaSE-21",
+      "path": "/usr/lib/jvm/java-21-openjdk"
+    }
+  ],
+  "java.saveActions.organizeImports": true,
+  "java.sources.organizeImports.starThreshold": 5,
+  "java.sources.organizeImports.staticStarThreshold": 3,
+  "[java]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [100, 120]
+  },
+
+  "// === Java Naming Conventions (enforced via Checkstyle) ===": "",
+  "java.checkstyle.configuration": "${workspaceFolder}/configs/checkstyle-google.xml",
+  "java.checkstyle.version": "10.12.5",
+
+  "// === Maven Configuration ===": "",
+  "maven.terminal.useJavaHome": true,
+  "maven.executable.preferMavenWrapper": true,
+
+  "// === Files & Exclusions ===": "",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/build": true,
+    "**/.gradle": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/target": true,
+    "**/build": true,
+    "**/.gradle": true,
+    "**/dist": true,
+    "**/.venv": true,
+    "**/venv": true
+  },
+
+  "// === Language-Specific Associations ===": "",
+  "files.associations": {
+    "*.yml": "yaml",
+    "*.yaml": "yaml",
+    "Dockerfile*": "dockerfile",
+    "*.sh": "shellscript",
+    "*.bash": "shellscript",
+    ".env*": "properties"
+  },
+
+  "// === Docker ===": "",
+  "docker.showStartPage": false,
+
+  "// === Markdown ===": "",
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+
+  "// === JSON & YAML ===": "",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  "[yaml]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.autoIndent": "advanced"
+  },
+
+  "// === XML (for pom.xml, etc.) ===": "",
+  "[xml]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  }
+}

@@ -1,0 +1,42 @@
+# GitHub Copilot Configuration
+
+# Project-specific settings
+project:
+  name: agentic-rag
+  type: java-spring-boot
+  language: java
+  framework: spring-boot
+
+# Custom instructions for Copilot
+instructions:
+  - Follow Google Java Style Guide
+  - Use constructor injection for dependencies
+  - Add comprehensive JavaDoc for public APIs
+  - Include null checks and validation
+  - Use Optional for nullable return values
+  - Implement proper exception handling
+  - Add logging at appropriate levels
+  - Write unit tests for all business logic
+
+# Naming conventions
+naming:
+  classes: PascalCase
+  methods: camelCase
+  variables: camelCase
+  constants: UPPER_SNAKE_CASE
+  packages: lowercase
+
+# Code patterns to follow
+patterns:
+  - Use builder pattern for complex objects
+  - Implement DTO pattern for API communication
+  - Use repository pattern for data access
+  - Apply service layer pattern
+  - Implement circuit breaker for external calls
+
+# Testing preferences
+testing:
+  framework: junit5
+  mock_framework: mockito
+  integration: testcontainers
+  coverage_target: 80
