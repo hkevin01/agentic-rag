@@ -59,14 +59,14 @@ graph TB
     end
 ```
 
-| Feature | Traditional RAG | Agentic-RAG |
+| <sub>Feature</sub> | <sub>Traditional RAG</sub> | <sub>Agentic-RAG</sub> |
 |---------|----------------|-------------|
-| **Processing Model** | Linear: Retrieve → Generate | Iterative: Plan → Execute → Validate → Refine |
-| **Tool Usage** | None | Dynamic tool selection & chaining |
-| **Reasoning** | Single-shot | Multi-step with backtracking |
-| **Context Management** | Limited to retrieved docs | Conversational + episodic + semantic memory |
-| **Error Handling** | Fail or hallucinate | Retry with alternative strategies |
-| **Adaptability** | Static pipeline | Self-correcting with replanning |
+| <sub>**Processing Model**</sub> | <sub>Linear: Retrieve → Generate</sub> | <sub>Iterative: Plan → Execute → Validate → Refine</sub> |
+| <sub>**Tool Usage**</sub> | <sub>None</sub> | <sub>Dynamic tool selection & chaining</sub> |
+| <sub>**Reasoning**</sub> | <sub>Single-shot</sub> | <sub>Multi-step with backtracking</sub> |
+| <sub>**Context Management**</sub> | <sub>Limited to retrieved docs</sub> | <sub>Conversational + episodic + semantic memory</sub> |
+| <sub>**Error Handling**</sub> | <sub>Fail or hallucinate</sub> | <sub>Retry with alternative strategies</sub> |
+| <sub>**Adaptability**</sub> | <sub>Static pipeline</sub> | <sub>Self-correcting with replanning</sub> |
 
 ## Project Purpose & Motivation
 
@@ -608,15 +608,15 @@ class ChatServiceIntegrationTest {
 
 ### Technology Comparison Table
 
-| Component | Technology | Alternatives Considered | Why Not? |
+| <sub>Component</sub> | <sub>Technology</sub> | <sub>Alternatives Considered</sub> | <sub>Why Not?</sub> |
 |-----------|-----------|------------------------|----------|
-| **Backend** | Spring Boot | Quarkus, Micronaut | Spring's maturity and ecosystem breadth |
-| **Database** | PostgreSQL + pgvector | Pinecone, Weaviate, Milvus | Single DB for all data; lower ops complexity |
-| **Search** | OpenSearch | Elasticsearch, Solr | Open-source license, hybrid search support |
-| **Cache** | Redis | Memcached, Hazelcast | Rich data structures, persistence options |
-| **Build** | Maven | Gradle | Team familiarity, standardization |
-| **Testing** | JUnit 5 | TestNG, Spock | Modern API, better IDE support |
-| **Mocks** | FastAPI (Python) | Spring Boot | Rapid development, simpler for stateless APIs |
+| <sub>**Backend**</sub> | <sub>Spring Boot</sub> | <sub>Quarkus, Micronaut</sub> | <sub>Spring's maturity and ecosystem breadth</sub> |
+| <sub>**Database**</sub> | <sub>PostgreSQL + pgvector</sub> | <sub>Pinecone, Weaviate, Milvus</sub> | <sub>Single DB for all data; lower ops complexity</sub> |
+| <sub>**Search**</sub> | <sub>OpenSearch</sub> | <sub>Elasticsearch, Solr</sub> | <sub>Open-source license, hybrid search support</sub> |
+| <sub>**Cache**</sub> | <sub>Redis</sub> | <sub>Memcached, Hazelcast</sub> | <sub>Rich data structures, persistence options</sub> |
+| <sub>**Build**</sub> | <sub>Maven</sub> | <sub>Gradle</sub> | <sub>Team familiarity, standardization</sub> |
+| <sub>**Testing**</sub> | <sub>JUnit 5</sub> | <sub>TestNG, Spock</sub> | <sub>Modern API, better IDE support</sub> |
+| <sub>**Mocks**</sub> | <sub>FastAPI (Python)</sub> | <sub>Spring Boot</sub> | <sub>Rapid development, simpler for stateless APIs</sub> |
 
 ---
 
@@ -782,12 +782,12 @@ public List<Document> hybridSearch(String query, int topK) {
 
 **Types**:
 
-| Memory Type | Duration | Storage | Use Case |
+| <sub>Memory Type</sub> | <sub>Duration</sub> | <sub>Storage</sub> | <sub>Use Case</sub> |
 |-------------|----------|---------|----------|
-| **Short-term** | Session | Redis | Current conversation context |
-| **Long-term** | Permanent | PostgreSQL | Historical conversations |
-| **Episodic** | Permanent | PostgreSQL | User interaction patterns |
-| **Semantic** | Permanent | Knowledge Graph | Concept relationships |
+| <sub>**Short-term**</sub> | <sub>Session</sub> | <sub>Redis</sub> | <sub>Current conversation context</sub> |
+| <sub>**Long-term**</sub> | <sub>Permanent</sub> | <sub>PostgreSQL</sub> | <sub>Historical conversations</sub> |
+| <sub>**Episodic**</sub> | <sub>Permanent</sub> | <sub>PostgreSQL</sub> | <sub>User interaction patterns</sub> |
+| <sub>**Semantic**</sub> | <sub>Permanent</sub> | <sub>Knowledge Graph</sub> | <sub>Concept relationships</sub> |
 
 **Mechanism**:
 ```java
@@ -1024,15 +1024,15 @@ agentic-rag/
 
 ### Key Endpoints
 
-| Endpoint | Method | Description | Request | Response |
+| <sub>Endpoint</sub> | <sub>Method</sub> | <sub>Description</sub> | <sub>Request</sub> | <sub>Response</sub> |
 |----------|--------|-------------|---------|----------|
-| `/api/chat` | POST | Chat with RAG system | `{query, sessionId}` | `{answer, sources, plan}` |
-| `/api/documents` | POST | Ingest document | `{file, metadata}` | `{documentId, status}` |
-| `/api/search` | POST | Search knowledge base | `{query, filters, topK}` | `{results, scores}` |
-| `/api/conversations` | GET | List conversations | Query params | `[{id, title, created}]` |
-| `/api/conversations/{id}` | GET | Get conversation | Path param | `{messages, metadata}` |
-| `/actuator/health` | GET | Health check | - | `{status, components}` |
-| `/actuator/metrics` | GET | Application metrics | - | `{metrics...}` |
+| <sub>`/api/chat`</sub> | <sub>POST</sub> | <sub>Chat with RAG system</sub> | <sub>`{query, sessionId}`</sub> | <sub>`{answer, sources, plan}`</sub> |
+| <sub>`/api/documents`</sub> | <sub>POST</sub> | <sub>Ingest document</sub> | <sub>`{file, metadata}`</sub> | <sub>`{documentId, status}`</sub> |
+| <sub>`/api/search`</sub> | <sub>POST</sub> | <sub>Search knowledge base</sub> | <sub>`{query, filters, topK}`</sub> | <sub>`{results, scores}`</sub> |
+| <sub>`/api/conversations`</sub> | <sub>GET</sub> | <sub>List conversations</sub> | <sub>Query params</sub> | <sub>`[{id, title, created}]`</sub> |
+| <sub>`/api/conversations/{id}`</sub> | <sub>GET</sub> | <sub>Get conversation</sub> | <sub>Path param</sub> | <sub>`{messages, metadata}`</sub> |
+| <sub>`/actuator/health`</sub> | <sub>GET</sub> | <sub>Health check</sub> | <sub>-</sub> | <sub>`{status, components}`</sub> |
+| <sub>`/actuator/metrics`</sub> | <sub>GET</sub> | <sub>Application metrics</sub> | <sub>-</sub> | <sub>`{metrics...}`</sub> |
 
 ### Example: Chat Request
 
@@ -1128,15 +1128,15 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
 ## Performance Benchmarks
 
-| Metric | Target | Achieved | Notes |
+| <sub>Metric</sub> | <sub>Target</sub> | <sub>Achieved</sub> | <sub>Notes</sub> |
 |--------|--------|----------|-------|
-| **API Latency (p95)** | < 2s | 1.8s | End-to-end chat response |
-| **Search Latency (p95)** | < 100ms | 45ms | Hybrid search, 100K docs |
-| **Vector Search (p95)** | < 50ms | 38ms | Top-10 retrieval, 1M vectors |
-| **Throughput** | 100 req/s | 120 req/s | Basic endpoints, single instance |
-| **Memory Usage** | < 1GB | 850MB | Steady-state with 100 concurrent users |
-| **Cache Hit Ratio** | > 70% | 78% | Redis cache effectiveness |
-| **Test Coverage** | > 80% | 82% | Unit + integration tests |
+| <sub>**API Latency (p95)**</sub> | <sub>< 2s</sub> | <sub>1.8s</sub> | <sub>End-to-end chat response</sub> |
+| <sub>**Search Latency (p95)**</sub> | <sub>< 100ms</sub> | <sub>45ms</sub> | <sub>Hybrid search, 100K docs</sub> |
+| <sub>**Vector Search (p95)**</sub> | <sub>< 50ms</sub> | <sub>38ms</sub> | <sub>Top-10 retrieval, 1M vectors</sub> |
+| <sub>**Throughput**</sub> | <sub>100 req/s</sub> | <sub>120 req/s</sub> | <sub>Basic endpoints, single instance</sub> |
+| <sub>**Memory Usage**</sub> | <sub>< 1GB</sub> | <sub>850MB</sub> | <sub>Steady-state with 100 concurrent users</sub> |
+| <sub>**Cache Hit Ratio**</sub> | <sub>> 70%</sub> | <sub>78%</sub> | <sub>Redis cache effectiveness</sub> |
+| <sub>**Test Coverage**</sub> | <sub>> 80%</sub> | <sub>82%</sub> | <sub>Unit + integration tests</sub> |
 
 **Benchmark Setup**: 4 CPU cores, 8GB RAM, SSD storage
 
